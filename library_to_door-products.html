@@ -1,0 +1,56 @@
+	<ion-view view-title=" Library To Door" hide-nav-bar="false" >
+		<!-- popover -->
+		<ion-nav-buttons side="right">
+			<button class="button button-icon button-clear ion-information-circled" id="menu-popover" ng-click="popover.show($event)"></button>
+		</ion-nav-buttons>
+		<!-- ./popover -->
+		<ion-nav-title> Library To Door</ion-nav-title>
+		<!-- content -->
+		<ion-content delegate-handle="top"  scroll="true"   id="page-products" class=" page-products">
+		<!-- code refresh -->
+<ion-refresher pulling-text="Pull to refresh..."  on-refresh="doRefresh()"></ion-refresher>
+<!-- ./code refresh -->
+
+<!-- code search -->
+		<ion-list class="card list" style="border-radius: 30px;">
+				<div class="item item-input">
+					<i class="icon ion-search placeholder-icon"></i>
+					<input type="search" ng-model="filter_products.name" placeholder="{{ 'Search' | translate }}" aria-label="filter products.name" style="color: #ff7200;" />
+				</div>
+			</ion-list>
+<!-- ./code search -->
+
+<!-- code listing -->
+<div class="list row" ng-repeat="rows in chunked_products | filter:filter_products as results" ng-init="$last ? fireEvent() : null">
+	<div class="col card" ng-repeat="item in rows" style="border-radius: 30px 0px 30px 0px;
+-moz-border-radius: 30px 0px 30px 0px;
+-webkit-border-radius: 30px 0px 30px 0px;
+border: 0px solid #000000; color: #ff7200; background: rgba(255,115,0,1);
+background: -moz-linear-gradient(left, rgba(255,115,0,1) 0%, rgba(255,146,10,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,115,0,1)), color-stop(100%, rgba(255,146,10,1)));
+background: -webkit-linear-gradient(left, rgba(255,115,0,1) 0%, rgba(255,146,10,1) 100%);
+background: -o-linear-gradient(left, rgba(255,115,0,1) 0%, rgba(255,146,10,1) 100%);
+background: -ms-linear-gradient(left, rgba(255,115,0,1) 0%, rgba(255,146,10,1) 100%);
+background: linear-gradient(to right, rgba(255,115,0,1) 0%, rgba(255,146,10,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7300', endColorstr='#ff920a', GradientType=1 );">
+		<a class="item item-image ink" ng-href="#/library_to_door/product_singles/{{item.id}}">
+			<img alt="" class="ratio1x1" ng-src="{{item.featured.thumbnail}}" />
+		</a>
+        
+        <div class="item item-text-wrap" >
+          <span ng-bind-html="item.name | to_trusted" style="color: #ffffff;">{{product.name}}</span>
+            <strong class="calm" style="color: #ffffff;">{{ item.price | currency:"Ks":2 }}</strong><br/>
+          <span style="color: #ff7200;">{{item.rating}}</span>
+        </div>
+	
+	</div>
+</div>
+</br>
+</br>
+</br>
+</br>
+<!-- ./code listing -->
+      
+		</ion-content>
+		<!-- ./content -->
+	</ion-view>
